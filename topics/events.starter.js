@@ -32,11 +32,15 @@ document.querySelector(".show3").addEventListener("click", (e) => {
 // 4 — Similar to question number 2, this time use event bubbling to change the background color of the squares in #bubbleZone
 // hint: with event bubbling you can select the parent element and listen for events on its children to avoid adding multiple event listeners
 const bubblezone = document.getElementById("bubbleZone");
-bubblezone.addEventListener("mouseover", (e) => {
-  e.target.style.backgroundColor = "blue";
+bubblezone.addEventListener("mouseover", (event) => {
+  if (event.target.id != "bubbleZone") {
+    event.target.style.backgroundColor = "blue";
+  }
 });
 
 // 5 — Bonus: use mouseout to change the background color back to the original one on the squares in question 2 or 4
-document.querySelector(".zone").addEventListener("mouseout", () => {
-  document.querySelector(".zone").style.backgroundColor = "white";
+document.querySelectorAll(".zone, #bubbleZone .zone").forEach((element) => {
+  element.addEventListener("mouseout", () => {
+    element.style.backgroundColor = "white";
+  });
 });
